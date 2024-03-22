@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_nutri/Screens/login_page.dart';
-import 'package:my_nutri/Widgets/suggest_diet_carousel.dart';
+import 'package:my_nutri/Screens/diet_plan.dart';
+import 'package:my_nutri/Screens/pros_and_cons_screen.dart';
 import 'package:my_nutri/Widgets/top_recipes_carousel.dart';
 import 'package:my_nutri/Widgets/trending_blogs_carousel.dart';
 
@@ -52,44 +52,38 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: SizedBox(
-                    height: 200,
+                    height: 180,
                     width: double.infinity,
                     child: Stack(
                       children: [
                         Container(
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 249, 231, 194),
-                            // image: const DecorationImage(
-                            //   image: AssetImage("assets/01.jpg"),
-                            //
-                            // ),
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
                         Positioned(
-                          bottom: 10,
+                          bottom: 15,
                           right: 190,
                           left: 10,
-                          child: ElevatedButton(
-                            style: const ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                Color.fromARGB(255, 193, 52, 41),
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (ctx) => const LoginPage(),
-                                ),
-                              );
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder:(context) => const ReadMoreDetails(),),);
                             },
-                            child: const Text(
-                              "Read More...",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                letterSpacing: 0.5,
+                            child: Container(
+                              height: 35,
+                              decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 193, 52, 41),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: const Center(
+                                child: Text(
+                                  "Read More...",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize: 19.5),
+                                ),
                               ),
                             ),
                           ),
@@ -100,10 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Text(
                             "The Pros and\nCons of fast food.",
                             style: TextStyle(
-                              fontSize: 22,
+                              fontSize: 24,
                               fontWeight: FontWeight.bold,
                               color: Color.fromARGB(255, 86, 41, 25),
-                              letterSpacing: 0.5,
+                              letterSpacing: 0.2,
                             ),
                           ),
                         ),
@@ -118,6 +112,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Color.fromARGB(255, 193, 52, 41),
                               letterSpacing: 0.5,
                             ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 15,
+                          right: 8,
+                          bottom: 15,
+                          child: Image.asset(
+                            "assets/06.png",
+                            height: 175,
                           ),
                         ),
                       ],
@@ -145,26 +148,24 @@ class _HomeScreenState extends State<HomeScreen> {
                           bottom: 35,
                           right: 15,
                           left: 200,
-                          child: ElevatedButton(
-                            style: const ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                Colors.white,
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (ctx) => const LoginPage(),
-                                ),
-                              );
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder:(context) => const DietPlanPage(),),);
                             },
-                            child: const Text(
-                              "Create Plan",
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(195, 18, 114, 167),
-                                letterSpacing: 0.5,
+                            child: Container(
+                              height: 25,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: const Center(
+                                child: Text(
+                                  "Create Plan",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(195, 18, 114, 167),
+                                      fontSize: 19.5),
+                                ),
                               ),
                             ),
                           ),
@@ -192,11 +193,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 const Padding(
                   padding: EdgeInsets.only(left: 20, top: 10),
                   child: Text(
-                    "Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo",
+                    "'An ounce of prevention is worth a pound of cure.' \n- Benjamin Franklin",
                     style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 99, 99, 99)),
                   ),
                 ),
                 const SizedBox(
@@ -204,7 +205,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const TopRecipesCarousel(),
                 const TrendingBlogsCarousel(),
-                const SuggestDietCarousel(),
               ],
             ),
           ),

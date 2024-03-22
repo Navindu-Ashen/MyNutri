@@ -10,7 +10,7 @@ class SuggestDietPlanCarousalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
-      width: 210,
+      width: 250,
       child: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
@@ -64,18 +64,39 @@ class SuggestDietPlanCarousalCard extends StatelessWidget {
                 ),
               ],
             ),
-            child: Stack(
+           child: Stack(
               children: <Widget>[
                 Hero(
-                  tag: splan.image,
+                  tag:splan.image,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Image(
                       height: 180.0,
-                      width: 180.0,
+                      width: 250.0,
                       image: AssetImage(splan.image),
                       fit: BoxFit.cover,
                     ),
+                  ),
+                ),
+                Positioned(
+                  left: 10.0,
+                  bottom: 10.0,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(1.0),
+                        child: Text(
+                          splan.title,
+                          style: const TextStyle(
+                            letterSpacing: 1,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

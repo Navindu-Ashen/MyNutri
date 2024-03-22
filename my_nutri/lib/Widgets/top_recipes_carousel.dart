@@ -8,10 +8,8 @@ import 'package:my_nutri/Widgets/Inner%20Widgets/top_recipes.dart';
 class TopRecipesCarousel extends StatelessWidget {
   const TopRecipesCarousel({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: <Widget>[
         Padding(
@@ -31,7 +29,7 @@ class TopRecipesCarousel extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (ctx) =>  const TopRecipesAll(),
+                      builder: (ctx) => const TopRecipesAll(),
                     ),
                   );
                 },
@@ -40,7 +38,6 @@ class TopRecipesCarousel extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                   
                     letterSpacing: 1.0,
                     color: Color.fromARGB(195, 18, 114, 167),
                   ),
@@ -50,30 +47,28 @@ class TopRecipesCarousel extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 280,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 5,
-            itemBuilder: (BuildContext context, int index) {
-             TopRecipes recipes =toprecipe[index];
-                 
-                 return GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => TopRecipesDetails(
-                      topr: recipes,
+            height: 220,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder: (BuildContext context, int index) {
+                TopRecipes recipes = toprecipe[index];
+
+                return GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => TopRecipesDetails(
+                        topr: recipes,
+                      ),
                     ),
                   ),
-                ),
-              
-                
-                child: TopRecipesCarousalCard(trecipes: recipes,),
-                 );
-              
-            },
-            )
-          ),
+                  child: TopRecipesCarousalCard(
+                    trecipes: recipes,
+                  ),
+                );
+              },
+            )),
       ],
     );
   }

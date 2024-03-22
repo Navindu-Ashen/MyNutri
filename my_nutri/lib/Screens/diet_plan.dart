@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:my_nutri/Screens/login_page.dart';
+import 'package:my_nutri/Screens/help_screen.dart';
+import 'package:my_nutri/Screens/suggest_diet_plans/suggest_plan.dart';
 
-class Signupscreen extends StatelessWidget {
-  const Signupscreen({super.key});
+class DietPlanPage extends StatefulWidget {
+  const DietPlanPage({super.key});
 
   @override
+  State<DietPlanPage> createState() => _DietPlanPageState();
+}
+
+class _DietPlanPageState extends State<DietPlanPage> {
+  @override
   Widget build(BuildContext context) {
+    String? selectedBodyType;
     final Size size = MediaQuery.of(context).size;
 
-    return Stack(
-      children: [
-        Positioned(
-          child: Image.asset(
-            "assets/02.png",
-            fit: BoxFit.cover,
+    return Scaffold(
+      body: Stack(
+        children: [
+          Positioned(
+            left: 10,
+            bottom: 120,
+            child: Image.asset(
+              "assets/07.png",
+              fit: BoxFit.cover,
+              width: 400,
+              height: 500,
+            ),
           ),
-        ),
-        Scaffold(
-          body: SingleChildScrollView(
+          SingleChildScrollView(
             child: Container(
               width: size.width,
               height: size.height,
@@ -30,22 +41,75 @@ class Signupscreen extends StatelessWidget {
                   height: 20,
                   width: double.infinity,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Column(
+                      const Column(
                         children: [
-                          const SizedBox(
-                            height: 19.8,
+                          SizedBox(
+                            height: 30,
                           ),
-                          Image.asset(
-                            "assets/logo.png",
-                            width: 160,
+                          Text(
+                            "Get Your Own\n    Diet Plan",
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.2,
+                              color: Color.fromARGB(195, 8, 63, 92),
+                            ),
                           ),
                         ],
                       ),
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 120, vertical: 5),
+                            decoration: const BoxDecoration(
+                              color: Color.fromARGB(195, 18, 114, 167),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                            ),
+                            child: DropdownButton<String>(
+                              value: selectedBodyType,
+                              dropdownColor:
+                                  const Color.fromARGB(195, 18, 114, 167),
+                              underline: Container(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  selectedBodyType = newValue;
+                                });
+                              },
+                              items: <String>[
+                                'Slim',
+                                'Muscular',
+                                'Curvy'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                              hint: const Text(
+                                "Body Type",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
                           const SizedBox(
                             height: 10,
                           ),
@@ -61,9 +125,9 @@ class Signupscreen extends StatelessWidget {
                             child: const TextField(
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: "First Name",
+                                hintText: "Current Body Weight",
                                 hintStyle: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
@@ -71,79 +135,7 @@ class Signupscreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 5),
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(195, 18, 114, 167),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20),
-                              ),
-                            ),
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Last Name",
-                                hintStyle: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 5),
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(195, 18, 114, 167),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20),
-                              ),
-                            ),
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "User Name",
-                                hintStyle: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 5),
-                            decoration: const BoxDecoration(
-                              color: Color.fromARGB(195, 18, 114, 167),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20),
-                              ),
-                            ),
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Email",
-                                hintStyle: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(
@@ -158,9 +150,9 @@ class Signupscreen extends StatelessWidget {
                               obscureText: true,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: "Password",
+                                hintText: "Weight Goal",
                                 hintStyle: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
@@ -168,24 +160,53 @@ class Signupscreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 5),
+                                horizontal: 65, vertical: 5),
                             decoration: const BoxDecoration(
                               color: Color.fromARGB(195, 18, 114, 167),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20),
-                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
                             ),
-                            child: const TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Confirm Password",
-                                hintStyle: TextStyle(
-                                  fontSize: 16,
+                            child: DropdownButton<String>(
+                              value: selectedBodyType,
+                              dropdownColor:
+                                  const Color.fromARGB(195, 18, 114, 167),
+                              underline: Container(),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  selectedBodyType = newValue;
+                                });
+                              },
+                              items: <String>[
+                                'Balanced Diet',
+                                'Meal Planning',
+                                'Mindful Eating',
+                                'Fiber-rich Foods',
+                                'Healthy Snacking',
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: SizedBox(
+                                    width: 200,
+                                    child: Text(
+                                      value,
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                              hint: const Text(
+                                "Food Habits",
+                                style: TextStyle(
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
@@ -195,12 +216,18 @@ class Signupscreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        height: 62,
+                        height: 290,
                       ),
                       Column(
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (ctx) => const SuggestDietPlan(),
+                                ),
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               elevation: 0,
                               padding: const EdgeInsets.all(17),
@@ -212,11 +239,11 @@ class Signupscreen extends StatelessWidget {
                             ),
                             child: const Center(
                               child: Text(
-                                "Create Account",
+                                "Make Diet Plan ",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 19.9,
+                                  fontSize: 22,
                                 ),
                               ),
                             ),
@@ -227,7 +254,7 @@ class Signupscreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            "Already have an account?",
+                            "Need Help?",
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -238,12 +265,12 @@ class Signupscreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const LoginPage(),
+                                  builder: (context) => const HelpScreen(),
                                 ),
                               );
                             },
                             child: const Text(
-                              "Log in",
+                              "Help Section",
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -258,8 +285,8 @@ class Signupscreen extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

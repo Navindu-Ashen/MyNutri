@@ -14,40 +14,66 @@ class _SuggestDietPlanAllState extends State<SuggestDietPlanAll> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Suggest Diet Plan",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.5,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ),
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
-              itemCount: suggestdietplan.length,
-              itemBuilder: (BuildContext context, int index) {
-                SuggestDietPlans suggestdietplans = suggestdietplan[index];
-                return GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => SuggestDietPlansDetails(
-                        suggestdp: suggestdietplans,
+          Positioned(
+            left: 10,
+            bottom: 30,
+            child: Image.asset(
+              "assets/07.png",
+              fit: BoxFit.cover,
+              width: 400,
+              height: 500,
+            ),
+          ),
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, top: 40, right: 75),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.arrow_back),
+                        iconSize: 30,
+                        color: Colors.black,
                       ),
-                    ),
+                      const Text(
+                        "Suggest Diet Plans All",
+                        style: TextStyle(
+                          letterSpacing: 1.2,
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
                   ),
-                  child: Stack(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(40, 5, 20, 5),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ListView.builder(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: suggestdietplan.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    SuggestDietPlans suggestdietplans = suggestdietplan[index];
+                    return GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => SuggestDietPlansDetails(
+                            suggestdp: suggestdietplans,
+                          ),
+                        ),
+                      ),
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(20, 5, 20, 5),
                         height: 170,
-                        width: double.infinity,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
@@ -59,79 +85,59 @@ class _SuggestDietPlanAllState extends State<SuggestDietPlanAll> {
                             ),
                           ],
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                              100.0, 20.0, 20.0, 20.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                 Padding(
-                                    padding: const EdgeInsets.only(left: 35),
-                                    child: SizedBox(
-                                      width: 180,
-                                      child: Text(
-                                        suggestdietplans.title,
-                                        style: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: Image(
+                                  width: 150,
+                                  image: AssetImage(suggestdietplans.image),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      suggestdietplans.title,
+                                      style: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
                                       ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    children: [
-                                      const SizedBox(
-                                        height: 15,
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      suggestdietplans.description,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.black,
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 35),
-                                        child: Text(
-                                          suggestdietplans.description,
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                      Positioned(
-                        left: 15,
-                        top: 15,
-                        bottom: 15,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image(
-                            width: 150,
-                            image: AssetImage(suggestdietplans.image),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+                    );
+                  },
+                ),
+              ],
             ),
           ),
         ],
