@@ -8,7 +8,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String _userName = 'Navindu';
+  final String _userName = 'Navindu';
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.grey[200],
+        color: const Color.fromARGB(195, 18, 114, 167),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,14 +70,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: Colors.white,
             ),
           ),
           Text(
             value,
             style: const TextStyle(
               fontSize: 18,
-              color: Colors.black87,
+              color: Colors.white,
             ),
           ),
         ],

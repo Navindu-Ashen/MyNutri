@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_nutri/Screens/book_page.dart';
 import 'package:my_nutri/Screens/diet_plan.dart';
+import 'package:my_nutri/Screens/profile_screen.dart';
 import 'package:my_nutri/Screens/pros_and_cons_screen.dart';
 import 'package:my_nutri/Widgets/top_recipes_carousel.dart';
 import 'package:my_nutri/Widgets/trending_blogs_carousel.dart';
@@ -12,10 +14,35 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _currentTab = 0;
+  void _navigateToPage(int index) {
+    setState(() {
+      _currentTab = index;
+    });
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+        case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const BookScreen()),
+        );
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ProfileScreen()),
+        );
+        break;
+      default:
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    int _currentTab = 0;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -69,7 +96,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(
-                                  context, MaterialPageRoute(builder:(context) => const ReadMoreDetails(),),);
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ReadMoreDetails(),
+                                ),
+                              );
                             },
                             child: Container(
                               height: 35,
@@ -151,7 +182,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(
-                                  context, MaterialPageRoute(builder:(context) => const DietPlanPage(),),);
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const DietPlanPage(),
+                                ),
+                              );
                             },
                             child: Container(
                               height: 25,
@@ -227,11 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: BottomNavigationBar(
           currentIndex: _currentTab,
           selectedItemColor: const Color.fromARGB(195, 14, 192, 106),
-          onTap: (int value) {
-            setState(() {
-              _currentTab = value;
-            });
-          },
+          onTap: _navigateToPage,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(
