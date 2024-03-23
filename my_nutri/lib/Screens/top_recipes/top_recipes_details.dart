@@ -58,7 +58,7 @@ class TopRecipesDetails extends StatelessWidget {
                     letterSpacing: 1.2,
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                    color:  Color.fromARGB(195, 18, 114, 167),),
               ),
             ),
             Padding(
@@ -76,53 +76,23 @@ class TopRecipesDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "Hello World",
+                    "Ingredients",
                     style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                        color:   Color.fromARGB(195, 18, 114, 167),),
                   ),
                 ],
               ),
             ),
-            const Row(
+             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 20, top: 10),
+                  padding: const EdgeInsets.only(left: 20, top: 10),
                   child: Text(
-                    "1.Hello World",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                  ),
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text(
-                    "2.Hello World",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                  ),
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text(
-                    "3.Hello World",
-                    style: TextStyle(
+                    topr.ing,
+                    style:const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: Colors.black),
@@ -136,20 +106,20 @@ class TopRecipesDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "Hello World",
+                    "Method",
                     style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                        color:   Color.fromARGB(195, 18, 114, 167),),
                   ),
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20, top: 10, right: 20),
+             Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
               child: Text(
-                "Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo",
-                style: TextStyle(
+                topr.steps,
+                style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Colors.black),

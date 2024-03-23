@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
           context,
           MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
-        case 1:
+      case 1:
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const BookScreen()),
@@ -232,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 99, 99, 99)),
+                        color: Color.fromARGB(255, 71, 71, 71)),
                   ),
                 ),
                 const SizedBox(

@@ -8,7 +8,7 @@ class TrendingBlogsDetails extends StatelessWidget {
   });
   final TrendingBlogs trendingb;
 
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -53,12 +53,12 @@ class TrendingBlogsDetails extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(1.0),
               child: Text(
-               trendingb.title,
+                trendingb.title,
                 style: const TextStyle(
                     letterSpacing: 1.2,
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                    color: Color.fromARGB(195, 18, 114, 167),),
               ),
             ),
             Padding(
@@ -70,31 +70,30 @@ class TrendingBlogsDetails extends StatelessWidget {
                 textAlign: TextAlign.justify,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 20, left: 20),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "Hello World",
-                    style: TextStyle(
-                       
+                    trendingb.text,
+                    style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                        color:Color.fromARGB(195, 18, 114, 167),),
                   ),
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20,top: 10,right: 20),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
               child: Text(
-                "Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo",
-                style: TextStyle(
+                trendingb.about,
+                style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Colors.black),
-                    textAlign: TextAlign.justify,
+                textAlign: TextAlign.justify,
               ),
             ),
             Padding(
