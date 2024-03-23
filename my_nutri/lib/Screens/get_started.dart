@@ -114,7 +114,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                backgroundColor: const Color.fromARGB(195, 18, 114, 167),
+                backgroundColor: const Color.fromARGB(195, 51, 154, 163),
               ),
               child: Text(
                 currentIndex == contents.length - 1 ? "Get Started" : "",

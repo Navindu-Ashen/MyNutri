@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_nutri/Data/top_recipes.dart';
 import 'package:my_nutri/Models/top_recipes.dart';
 import 'package:my_nutri/Screens/top_recipes/top_recipes_details.dart';
-import 'package:my_nutri/Screens/top_recipes/top_recipes_list.dart';
 import 'package:my_nutri/Widgets/Inner%20Widgets/top_recipes.dart';
 
 class TopRecipesCarousel extends StatelessWidget {
@@ -12,35 +11,18 @@ class TopRecipesCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 32),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              const Text(
+              Text(
                 "Top Recipes",
                 style: TextStyle(
-                  fontSize: 24,
+                  color: Color.fromARGB(255, 18, 73, 86),
+                  fontSize: 32,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.0,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => const TopRecipesAll(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "See All",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.0,
-                    color: Color.fromARGB(195, 18, 114, 167),
-                  ),
                 ),
               ),
             ],

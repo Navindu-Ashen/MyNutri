@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:my_nutri/Screens/login_page.dart';
 
 class Signupscreen extends StatelessWidget {
@@ -8,17 +9,17 @@ class Signupscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    return Stack(
-      children: [
-        Positioned(
-          child: Image.asset(
-            "assets/02.png",
-            fit: BoxFit.cover,
-          ),
-        ),
-        Scaffold(
-          body: SingleChildScrollView(
-            child: Container(
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: 100,
+              left: 0,
+              right: 0,
+              child: Image.asset("assets/02.png"),
+            ),
+            Container(
               width: size.width,
               height: size.height,
               padding: const EdgeInsets.only(
@@ -53,7 +54,7 @@ class Signupscreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
                             decoration: const BoxDecoration(
-                              color: Color.fromARGB(195, 18, 114, 167),
+                              color: Color.fromARGB(195, 51, 154, 163),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(20),
                               ),
@@ -77,7 +78,7 @@ class Signupscreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
                             decoration: const BoxDecoration(
-                              color: Color.fromARGB(195, 18, 114, 167),
+                              color: Color.fromARGB(195, 51, 154, 163),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(20),
                               ),
@@ -101,7 +102,7 @@ class Signupscreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
                             decoration: const BoxDecoration(
-                              color: Color.fromARGB(195, 18, 114, 167),
+                              color: Color.fromARGB(195, 51, 154, 163),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(20),
                               ),
@@ -125,7 +126,7 @@ class Signupscreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
                             decoration: const BoxDecoration(
-                              color: Color.fromARGB(195, 18, 114, 167),
+                              color: Color.fromARGB(195, 51, 154, 163),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(20),
                               ),
@@ -149,7 +150,7 @@ class Signupscreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
                             decoration: const BoxDecoration(
-                              color: Color.fromARGB(195, 18, 114, 167),
+                              color: Color.fromARGB(195, 51, 154, 163),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(20),
                               ),
@@ -174,7 +175,7 @@ class Signupscreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
                             decoration: const BoxDecoration(
-                              color: Color.fromARGB(195, 18, 114, 167),
+                              color: Color.fromARGB(195, 51, 154, 163),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(20),
                               ),
@@ -208,7 +209,7 @@ class Signupscreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               backgroundColor:
-                                  const Color.fromARGB(195, 18, 114, 167),
+                                  const Color.fromARGB(195, 51, 154, 163),
                             ),
                             child: const Center(
                               child: Text(
@@ -257,9 +258,9 @@ class Signupscreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
