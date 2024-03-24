@@ -125,7 +125,7 @@ class _DietPlanPageState extends State<DietPlanPage> {
                           ),
                         ),
                         child: const TextField(
-                          obscureText: true,
+                          // obscureText: true,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "                       Weight Goal",

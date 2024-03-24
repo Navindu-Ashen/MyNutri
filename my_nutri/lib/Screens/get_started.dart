@@ -68,7 +68,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                         contents[i].title,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                          fontSize: 27,
+                          fontSize: 23,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
