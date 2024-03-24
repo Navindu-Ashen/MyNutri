@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_nutri/Screens/book_page.dart';
 import 'package:my_nutri/Screens/diet_plan.dart';
+import 'package:my_nutri/Screens/list.dart';
 import 'package:my_nutri/Screens/profile_screen.dart';
 import 'package:my_nutri/Screens/pros_and_cons_screen.dart';
 import 'package:my_nutri/Widgets/top_recipes_carousel.dart';
@@ -15,171 +15,168 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentTab = 0;
+  Widget? currentContent;
   void _navigateToPage(int index) {
     setState(() {
       _currentTab = index;
     });
-    switch (index) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-        );
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const BookScreen()),
-        );
-      case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const ProfileScreen()),
-        );
-        break;
-      default:
-        break;
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          child: Padding(
-            padding: const EdgeInsets.all(5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 50),
-                  child: Text(
-                    "Hello Navindu!",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 103, 203, 106),
+    currentContent = SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(5),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 50),
+              child: Text(
+                "Hello Navindu!",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 103, 203, 106),
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 1),
+              child: Text(
+                "Find, track and eat healthy food.",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 95, 95, 95),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: SizedBox(
+                height: 180,
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 255, 240, 225),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
                     ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 1),
-                  child: Text(
-                    "Find, track and eat healthy food.",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: SizedBox(
-                    height: 180,
-                    width: double.infinity,
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 249, 231, 194),
-                            borderRadius: BorderRadius.circular(25),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 18,
+                        top: 10,
+                        bottom: 10,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const SizedBox(
+                            width: 0,
                           ),
-                        ),
-                        Positioned(
-                          bottom: 15,
-                          right: 190,
-                          left: 10,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ReadMoreDetails(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              height: 35,
-                              decoration: BoxDecoration(
-                                  color: const Color.fromARGB(255, 193, 52, 41),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: const Center(
-                                child: Text(
-                                  "Read More...",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 19.5),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Trending",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 193, 52, 41),
+                                  letterSpacing: 0.5,
                                 ),
                               ),
-                            ),
+                              const Text(
+                                "The Pros and\nCons of fast food.",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 86, 41, 25),
+                                  letterSpacing: 0.2,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 18,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ReadMoreDetails(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 140,
+                                  decoration: BoxDecoration(
+                                      color:
+                                          const Color.fromARGB(255, 195, 95, 79),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: const Padding(
+                                    padding: EdgeInsets.only(top: 10, left: 10),
+                                    child: Text(
+                                      "Read More...",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                          fontSize: 19.5),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        const Positioned(
-                          top: 50,
-                          left: 20,
-                          child: Text(
-                            "The Pros and\nCons of fast food.",
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 86, 41, 25),
-                              letterSpacing: 0.2,
-                            ),
+                          Image.asset(
+                            "assets/06.png",
+                            width: 130,
                           ),
-                        ),
-                        const Positioned(
-                          top: 20,
-                          left: 20,
-                          child: Text(
-                            "Trending",
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: SizedBox(
+                height: 110,
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(195, 51, 154, 163),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const Text(
+                            "Get Your\nOwn Diet Plan",
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 22,
                               fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 193, 52, 41),
+                              color: Colors.white,
                               letterSpacing: 0.5,
                             ),
                           ),
-                        ),
-                        Positioned(
-                          top: 15,
-                          right: 8,
-                          bottom: 15,
-                          child: Image.asset(
-                            "assets/06.png",
-                            height: 175,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: SizedBox(
-                    height: 110,
-                    width: double.infinity,
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(195, 18, 114, 167),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        Positioned(
-                          top: 35,
-                          bottom: 35,
-                          right: 15,
-                          left: 200,
-                          child: GestureDetector(
+                          GestureDetector(
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -189,7 +186,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                             child: Container(
-                              height: 25,
+                              height: 40,
+                              width: 150,
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10)),
@@ -204,47 +202,44 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                        ),
-                        const Positioned(
-                          top: 26,
-                          left: 30,
-                          child: Text(
-                            "Get Your\nOwn Diet Plan",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 20, top: 10),
-                  child: Text(
-                    "'An ounce of prevention is worth a pound of cure.' \n- Benjamin Franklin",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 71, 71, 71)),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const TopRecipesCarousel(),
-                const TrendingBlogsCarousel(),
-              ],
+              ),
             ),
-          ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 32,
+                vertical: 16,
+              ),
+              child: Text(
+                "An ounce of prevention is worth a pound of cure. \n- Benjamin Franklin -",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 71, 71, 71)),
+              ),
+            ),
+            const TopRecipesCarousel(),
+            const TrendingBlogsCarousel(),
+          ],
         ),
       ),
+    );
+
+    if (_currentTab == 1) {
+      currentContent = const ListScreen();
+    } else if (_currentTab == 2) {
+      currentContent = const ProfileScreen();
+    }
+    return Scaffold(
+      body: currentContent,
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(

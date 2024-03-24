@@ -9,53 +9,53 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
-    return Stack(
-      children: [
-        Positioned(
-          
-          child: Image.asset(
-            "assets/02.png",
-            fit: BoxFit.cover,
-            
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Stack(children: [
+          Positioned(
+            bottom: 100,
+            left: 0,
+            right: 0,
+            child: Image.asset(
+              "assets/02.png",
+            ),
           ),
-        ),
-        Scaffold(
-          body: SingleChildScrollView(
-            child: Container(
-              width: size.width,
-              height: size.height,
-              padding: const EdgeInsets.only(
-                  left: 20, right: 20, top: 20, bottom: 20),
-              color: Colors.transparent,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  height: 20,
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          const SizedBox(
-                            height: 19.8,
+          Container(
+            width: size.width,
+            height: size.height,
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
+            color: Colors.transparent,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 20,
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        const SizedBox(
+                          height: 19.8,
+                        ),
+                        Image.asset(
+                          "assets/logo.png",
+                          width: 180,
+                        ),
+                        const Text(
+                          "Welcome Back!",
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1.2,
+                            color: Color.fromARGB(255, 139, 139, 139),
                           ),
-                          Image.asset(
-                            "assets/logo.png",
-                            width: 160,
-                          ),
-                          const Text(
-                            "Welcome Back!",
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 1.2,
-                              color: Color.fromARGB(255, 139, 139, 139),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
+                        ),
+                      ],
+                    ),
+                    Form(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           const SizedBox(
@@ -65,13 +65,13 @@ class LoginPage extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
                             decoration: const BoxDecoration(
-                              color: Color.fromARGB(195, 18, 114, 167),
+                              color: Color.fromARGB(195, 51, 154, 163),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(20),
                               ),
                             ),
-                            child: const TextField(
-                              decoration: InputDecoration(
+                            child: TextFormField(
+                              decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Email",
                                 hintStyle: TextStyle(
@@ -80,6 +80,7 @@ class LoginPage extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                               ),
+                              keyboardType: TextInputType.emailAddress,
                             ),
                           ),
                           const SizedBox(
@@ -89,14 +90,14 @@ class LoginPage extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
                             decoration: const BoxDecoration(
-                              color: Color.fromARGB(195, 18, 114, 167),
+                              color: Color.fromARGB(195, 51, 154, 163),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(20),
                               ),
                             ),
-                            child: const TextField(
+                            child: TextFormField(
                               obscureText: true,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Password",
                                 hintStyle: TextStyle(
@@ -116,78 +117,78 @@ class LoginPage extends StatelessWidget {
                           )
                         ],
                       ),
-                      const SizedBox(
-                        height: 100,
-                      ),
-                      Column(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (ctx) => const HomeScreen(),
-                                ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              padding: const EdgeInsets.all(17),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                    ),
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (ctx) => const HomeScreen(),
                               ),
-                              backgroundColor:
-                                  const Color.fromARGB(195, 18, 114, 167),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            padding: const EdgeInsets.all(17),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Center(
-                              child: Text(
-                                "Login",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
+                            backgroundColor:
+                                const Color.fromARGB(195, 51, 154, 163),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Login",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Signupscreen()),
-                              );
-                            },
-                            style: TextButton.styleFrom(
-                              elevation: 0,
-                              padding: const EdgeInsets.all(17),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "Create Account",
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 129, 129, 129),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Signupscreen()),
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            elevation: 0,
+                            padding: const EdgeInsets.all(17),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                          child: const Center(
+                            child: Text(
+                              "Create Account",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 129, 129, 129),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ]),
+      ),
     );
   }
 }
