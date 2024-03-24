@@ -67,7 +67,7 @@ class TopRecipesDetails extends StatelessWidget {
                 topr.description,
                 style: const TextStyle(
                     letterSpacing: 1.2, fontSize: 15.5, color: Colors.black),
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
               ),
             ),
             const Padding(
@@ -85,20 +85,16 @@ class TopRecipesDetails extends StatelessWidget {
                 ],
               ),
             ),
-             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 10),
-                  child: Text(
-                    topr.ing,
-                    style:const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                  ),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
+              child: Text(
+                topr.ing,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
+                textAlign: TextAlign.left,
+              ),
             ),
             const Padding(
               padding: EdgeInsets.only(top: 20, left: 20),

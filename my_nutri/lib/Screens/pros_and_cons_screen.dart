@@ -7,100 +7,95 @@ class ReadMoreDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Container(
-                  height: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Hero(
-                    tag: "assets/navi.jpg",
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: const Image(
-                        image: AssetImage("assets/navi.jpg"),
-                        fit: BoxFit.cover,
-                        width: double.maxFinite,
-                      ),
-                    ),
-                  ),
+      appBar: AppBar(
+        title: const Text(
+          'Pros and Cons of Fast Food',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+        ),
+        backgroundColor: const Color.fromARGB(255, 193, 52, 41),
+      ),
+      body: Container(
+        color: const Color.fromARGB(255, 255, 240, 225),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 300,
+                child: Image.asset(
+                  'assets/ff.jpg',
+                  fit: BoxFit.cover,
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: const Icon(Icons.arrow_back),
-                        iconSize: 30,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            const Padding(
-              padding: EdgeInsets.all(1.0),
-              child: Text(
-                "Hello Hello",
-                style: TextStyle(
-                    letterSpacing: 1.2,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20, top: 2, right: 20),
-              child: Text(
-                "Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo",
+              const SizedBox(height: 20),
+              const Text(
+                'Pros of Fast Food:',
                 style: TextStyle(
-                    letterSpacing: 1.2, fontSize: 16, color: Colors.black),
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 86, 41, 25),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                '1. Convenience: Fast food is easily accessible and saves time, especially for busy individuals.',
+                style: TextStyle(fontSize: 18),
+              ),
+              const Text(
+                '2. Affordability: Fast food is often cheaper compared to dining at restaurants, making it budget-friendly.',
+                style: TextStyle(fontSize: 18),
+              ),
+              const Text(
+                '3. Variety: Fast food chains offer a wide range of menu options to choose from, catering to different tastes and preferences.',
+                style: TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Cons of Fast Food:',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 86, 41, 25),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                '1. Lack of Nutrition: Fast food is often high in calories, fat, sugar, and sodium, and lacks essential nutrients.',
+                style: TextStyle(fontSize: 18),
+              ),
+              const Text(
+                '2. Health Risks: Regular consumption of fast food is associated with various health issues such as obesity, heart disease, and diabetes.',
+                style: TextStyle(fontSize: 18),
+              ),
+              const Text(
+                '3. Environmental Impact: Fast food production and packaging contribute to environmental pollution and waste.',
+                style: TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Conclusion:',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 86, 41, 25),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'While fast food offers convenience and affordability, it comes with health and environmental drawbacks. It is essential to consume fast food in moderation and prioritize balanced nutrition.',
+                style: TextStyle(fontSize: 18),
                 textAlign: TextAlign.justify,
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 20, left: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Hello World",
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20, top: 10, right: 20),
-              child: Text(
-                "Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo",
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black),
-                textAlign: TextAlign.justify,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Image.asset(
-                "assets/logo.png",
-                width: 160,
-              ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(top: 10, left: 110),
+                child: Image.asset(
+                  "assets/logo.png",
+                  width: 160,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

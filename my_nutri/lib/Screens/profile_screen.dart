@@ -13,8 +13,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "My Profile",
+        ),
+      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.only(left: 15, right: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -60,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: const Color.fromARGB(195, 18, 114, 167),
+        color: const Color.fromARGB(195, 51, 154, 163),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -17,7 +17,7 @@ class TopRecipesCarousalCard extends StatelessWidget {
 
           Container(
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 255, 0, 0),
+              color:  Colors.transparent,
               borderRadius: BorderRadius.circular(20),
               boxShadow: const [
                 BoxShadow(
@@ -53,7 +53,7 @@ class TopRecipesCarousalCard extends StatelessWidget {
                           trecipes.title,
                           style: const TextStyle(
                             letterSpacing: 1,
-                            fontSize: 20,
+                            fontSize: 19,
                             fontWeight: FontWeight.bold,
                             color: Color.fromARGB(255, 255, 255, 255),
                           ),

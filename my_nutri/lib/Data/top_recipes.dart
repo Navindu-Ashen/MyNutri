@@ -2,7 +2,7 @@ import 'package:my_nutri/Models/top_recipes.dart';
 
 List<TopRecipes> toprecipe = [
   TopRecipes(
-    title: "One-Pot Garlicky Shrimp & Spinach",
+    title: "One-Pot Garlicky\nShrimp & Spinach",
     image: "assets/r1.png",
     description:
         "Shrimp, spinach and garlic brown and cook quickly for a simple one-pot weeknight dinner. A fast pan sauce gets life from zesty lemon juice, warm crushed red pepper and herby parsley.",
@@ -22,7 +22,7 @@ List<TopRecipes> toprecipe = [
         "Heat oil in a large skillet over medium-high heat. Add onion, pepper and zucchini; cook, stirring often, until the vegetables begin to brown, 5 to 6 minutes.Add chickpeas, simmer sauce and broth and bring to a simmer, stirring. Reduce heat to medium-low and simmer until the vegetables are tender, 4 to 6 minutes. Stir in spinach just before serving. Serve over rice.",
   ),
   TopRecipes(
-    title: "Garlic Roasted Salmon & Brussels Sprouts",
+    title: "Garlic Roasted Salmon\n& Brussels Sprouts",
     image: "assets/r3.png",
     description:
         "Roasting salmon on top of Brussels sprouts and garlic, flavored with wine and fresh oregano, is simple enough for a weeknight meal yet sophisticated enough to serve to company. Serve with whole-wheat couscous.",
@@ -32,7 +32,7 @@ List<TopRecipes> toprecipe = [
         "Preheat oven to 450 degrees F.Mince 2 garlic cloves and combine in a small bowl with oil, 1 tablespoon oregano, 1/2 teaspoon salt and 1/4 teaspoon pepper. Halve the remaining garlic and toss with Brussels sprouts and 3 tablespoons of the seasoned oil in a large roasting pan. Roast, stirring once, for 15 minutes.Add wine to the remaining oil mixture. Remove the pan from oven, stir the vegetables and place salmon on top. Drizzle with the wine mixture. Sprinkle with the remaining 1 tablespoon oregano and 1/2 teaspoon each salt and pepper. Bake until the salmon is just cooked through, 5 to 10 minutes more. Serve with lemon wedges.",
   ),
   TopRecipes(
-    title: "One-Pot Garlicky Shrimp & Broccoli",
+    title: "One-Pot Garlicky\nShrimp & Broccoli",
     image: "assets/r4.png",
     description:
         "Shrimp and broccoli cook quickly in this easy, one-pot recipe, making it perfect for busy weeknights. Serve this healthy shrimp recipe over whole grains or rice.",
@@ -42,7 +42,7 @@ List<TopRecipes> toprecipe = [
         "Heat 2 tablespoons oil in a large pot over medium heat. Add half the garlic and cook until beginning to brown, about 1 minute. Add broccoli, bell pepper and 1/4 teaspoon each salt and pepper. Cover and cook, stirring once or twice and adding 1 tablespoon water if the pot is too dry, until the vegetables are tender, 3 to 5 minutes. Transfer to a bowl and keep warm.Increase heat to medium-high and add the remaining 1 tablespoon oil to the pot. Add the remaining garlic and cook until beginning to brown, about 1 minute. Add shrimp and the remaining 1/4 teaspoon each salt and pepper; cook, stirring, until the shrimp are just cooked through, 3 to 5 minutes. Return the broccoli mixture to the pot along with lemon juice and stir to combine.",
   ),
   TopRecipes(
-    title: "Cabbage & Kielbasa Skillet",
+    title: "Cabbage &\nKielbasa Skillet",
     image: "assets/r5.png",
     description:
         "Smoky sausage, tender cabbage and sweet apples, along with mustard and cider vinegar, create a perfect balance of flavor in this hearty skillet dinner.",

@@ -59,7 +59,7 @@ class LoginPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           const SizedBox(
-                            height: 50,
+                            height: 5,
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(

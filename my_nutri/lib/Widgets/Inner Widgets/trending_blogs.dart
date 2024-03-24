@@ -45,6 +45,7 @@ class TrendingBlogsCarousalCard extends StatelessWidget {
                   left: 10.0,
                   bottom: 10.0,
                   child: Column(
+                    
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
@@ -53,7 +54,7 @@ class TrendingBlogsCarousalCard extends StatelessWidget {
                           trblog.title,
                           style: const TextStyle(
                             letterSpacing: 1,
-                            fontSize: 20,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: Color.fromARGB(255, 255, 255, 255),
                           ),

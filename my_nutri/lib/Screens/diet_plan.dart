@@ -10,9 +10,12 @@ class DietPlanPage extends StatefulWidget {
 }
 
 class _DietPlanPageState extends State<DietPlanPage> {
+  String? selectedBodyType;
+  String? selectedFoodHabit;
+
   @override
   Widget build(BuildContext context) {
-    String? selectedBodyType;
+    // ignore: unused_local_variable
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -146,13 +149,13 @@ class _DietPlanPageState extends State<DietPlanPage> {
                         ),
                         child: Center(
                           child: DropdownButton<String>(
-                            value: selectedBodyType,
+                            value: selectedFoodHabit,
                             dropdownColor:
                                 const Color.fromARGB(195, 18, 114, 167),
                             underline: Container(),
                             onChanged: (String? newValue) {
                               setState(() {
-                                selectedBodyType = newValue;
+                                selectedFoodHabit = newValue;
                               });
                             },
                             items: <String>[

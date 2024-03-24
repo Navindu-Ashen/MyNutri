@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               const Text(
-                                "The Pros and\nCons of fast food.",
+                                "The Pros and\nCons of Fast Food.",
                                 style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
@@ -116,11 +116,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 },
                                 child: Container(
-                                  height: 50,
+                                  height: 45,
                                   width: 140,
                                   decoration: BoxDecoration(
-                                      color:
-                                          const Color.fromARGB(255, 195, 95, 79),
+                                      color: const Color.fromARGB(
+                                          255, 195, 95, 79),
                                       borderRadius: BorderRadius.circular(10)),
                                   child: const Padding(
                                     padding: EdgeInsets.only(top: 10, left: 10),
@@ -221,8 +221,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 "An ounce of prevention is worth a pound of cure. \n- Benjamin Franklin -",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 17.5,
+                    fontWeight: FontWeight.w500,
                     color: Color.fromARGB(255, 71, 71, 71)),
               ),
             ),

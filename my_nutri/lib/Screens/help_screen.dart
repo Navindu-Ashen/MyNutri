@@ -1,132 +1,97 @@
 import 'package:flutter/material.dart';
 
 class HelpScreen extends StatelessWidget {
-  const HelpScreen({
-    super.key,
-  });
+  const HelpScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      appBar: AppBar(
+        title: const Text('Help Section'),
+      ),
+      body:  SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10,top: 30,right: 125),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: const Icon(Icons.arrow_back),
-                        iconSize: 30,
-                        color: Colors.black,
-                      ),
-                      const Text(
-                        "Help Section",
-                        style: TextStyle(
-                            letterSpacing: 1.2,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            
-            const Padding(
-              padding: EdgeInsets.only(left: 20, top: 2, right: 20),
-              child: Text(
-                "Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo",
-                style: TextStyle(
-                    letterSpacing: 1.2, fontSize: 16, color: Colors.black),
-                textAlign: TextAlign.justify,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Overview:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 20, left: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Hello World",
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ],
+            const SizedBox(height: 10),
+            const Text(
+              'The "Create a Diet Plan" feature allows you to generate a personalized diet plan based on your body type and food habits.',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'How to Use:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20, top: 10, right: 20),
-              child: Text(
-                "Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo",
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black),
-                textAlign: TextAlign.justify,
+            const SizedBox(height: 10),
+            const Text(
+              '1. Select your body type from the dropdown menu (e.g., Slim, Muscular, Curvy).',
+              style: TextStyle(fontSize: 16),
+            ),
+            const Text(
+              '2. Choose your food habits from the dropdown menu (e.g., Balanced Diet, Meal Planning, Mindful Eating).',
+              style: TextStyle(fontSize: 16),
+            ),
+            const Text(
+              '3. Enter your current body weight and your weight goal in the provided fields.',
+              style: TextStyle(fontSize: 16),
+            ),
+            const Text(
+              '4. Click on the "Make Diet Plan" button to generate your personalized diet plan.',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Troubleshooting Tips:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 20, left: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Hello World",
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ],
+            const SizedBox(height: 10),
+            const Text(
+              'If you encounter any issues or errors while creating your diet plan, please double-check the information you entered and ensure that all fields are filled out correctly.',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Contact Support:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20, top: 10, right: 20),
-              child: Text(
-                "Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo",
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black),
-                textAlign: TextAlign.justify,
+            const SizedBox(height: 10),
+            const Text(
+              'If you need further assistance or have any questions, please contact our support team at support@example.com.',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'We appreciate your feedback!',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 20, left: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Hello World",
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ],
-              ),
+            const SizedBox(height: 10),
+            const Text(
+              'Your feedback helps us improve our app. If you have any suggestions or ideas for enhancing the "Create a Diet Plan" feature, please let us know by filling out the feedback form in the app.',
+              style: TextStyle(fontSize: 16),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20, top: 10, right: 20),
-              child: Text(
-                "Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo",
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black),
-                textAlign: TextAlign.justify,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
+             Padding(
+              padding: const EdgeInsets.only(top: 10, left: 110),
               child: Image.asset(
                 "assets/logo.png",
                 width: 160,

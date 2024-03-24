@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:my_nutri/Screens/login_page.dart';
 
 class Signupscreen extends StatelessWidget {
