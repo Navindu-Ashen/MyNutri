@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const Padding(
               padding: EdgeInsets.only(top: 50),
               child: Text(
-                "Hello Navindu!",
+                "Hello User!",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
