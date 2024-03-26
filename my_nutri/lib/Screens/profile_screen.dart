@@ -9,7 +9,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final String _userName = 'Navindu';
+  final String _userName = 'User123';
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 CircleAvatar(
                   radius: 90,
-                  backgroundImage: AssetImage("assets/navi.jpg"),
+                  backgroundImage: AssetImage("assets/03.jpg"),
                 ),
               ],
             ),
@@ -47,14 +47,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             const SizedBox(height: 20),
             const SizedBox(height: 15),
-            _buildProfileInfo(title: 'First Name', value: 'Navindu'),
+            _buildProfileInfo(title: 'First Name', value: 'User'),
             const SizedBox(height: 15),
-            _buildProfileInfo(title: 'Last Name', value: 'Ashen'),
+            _buildProfileInfo(title: 'Last Name', value: '123'),
             const SizedBox(height: 15),
             _buildProfileInfo(
-                title: 'Email', value: 'LoveVCgayHuskey<3@gmail.com'),
+                title: 'Email', value: 'user123@gmail.com'),
             const SizedBox(height: 15),
-            _buildProfileInfo(title: 'Phone', value: '0774444408'),
 
             ElevatedButton(
               style: ButtonStyle(
