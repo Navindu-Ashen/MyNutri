@@ -81,6 +81,15 @@ class ListScreen extends StatelessWidget {
               content:
                   'Social support networks play a crucial role in promoting health and well-being. Having strong social connections and support systems can provide emotional support, encouragement, and a sense of belonging. Social support networks can help individuals cope with stress, navigate difficult situations, and improve overall mental health. Cultivating meaningful relationships, fostering social connections, and participating in social activities are important aspects of maintaining a healthy and fulfilling life.',
             ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Image.asset(
+                  "assets/logo.png",
+                  width: 160,
+                ),
+              ),
+            )
           ],
         ),
       ),
