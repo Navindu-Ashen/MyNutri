@@ -8,11 +8,12 @@ class SuggestDietPlansDetails extends StatelessWidget {
   });
   final SuggestDietPlans suggestdp;
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Stack(
               children: <Widget>[
@@ -51,15 +52,16 @@ class SuggestDietPlansDetails extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.all(1.0),
+            Center(
               child: Text(
+                textAlign: TextAlign.center,
                 suggestdp.title,
                 style: const TextStyle(
-                    letterSpacing: 1.2,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                  letterSpacing: 1.2,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(195, 18, 114, 167),
+                ),
               ),
             ),
             Padding(
@@ -68,7 +70,7 @@ class SuggestDietPlansDetails extends StatelessWidget {
                 suggestdp.description,
                 style: const TextStyle(
                     letterSpacing: 1.2, fontSize: 15.5, color: Colors.black),
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
               ),
             ),
             const Padding(
@@ -77,80 +79,48 @@ class SuggestDietPlansDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "Hello World",
+                    "Ingredients",
                     style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(195, 18, 114, 167),
+                    ),
                   ),
                 ],
               ),
             ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20, top: 10),
-                  child: Text(
-                    "1.Hello World",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                  ),
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text(
-                    "2.Hello World",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                  ),
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text(
-                    "3.Hello World",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                  ),
-                ),
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 20, left: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Hello World",
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20, top: 10, right: 20),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
               child: Text(
-                "Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo Ado ado ado meh boru marisi danda epa harida, Umberlath manussayo apith manussayo",
-                style: TextStyle(
+                suggestdp.ing,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 20, left: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "Method",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(195, 18, 114, 167),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
+              child: Text(
+                suggestdp.steps,
+                style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Colors.black),

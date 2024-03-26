@@ -59,6 +59,7 @@ class TopRecipesDetails extends StatelessWidget {
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                     color:  Color.fromARGB(195, 18, 114, 167),),
+                    
               ),
             ),
             Padding(
