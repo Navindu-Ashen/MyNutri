@@ -16,14 +16,15 @@ class _SuggestDietPlanAllState extends State<SuggestDietPlanAll> {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            left: 10,
-            bottom: 30,
-            child: Image.asset(
-              "assets/07.png",
-              fit: BoxFit.cover,
-              width: 400,
-              height: 500,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Image.asset(
+                "assets/07.png",
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
             ),
           ),
           SingleChildScrollView(

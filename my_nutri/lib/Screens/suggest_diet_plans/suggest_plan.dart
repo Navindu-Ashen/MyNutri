@@ -22,14 +22,15 @@ class _SuggestDietPlanState extends State<SuggestDietPlan> {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            left: 10,
-            bottom: 30,
-            child: Image.asset(
-              "assets/07.png",
-              fit: BoxFit.cover,
-              width: 400,
-              height: 500,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Image.asset(
+                "assets/07.png",
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
             ),
           ),
           SingleChildScrollView(
@@ -67,11 +68,10 @@ class _SuggestDietPlanState extends State<SuggestDietPlan> {
                   padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: randomizor.nextInt(5)+1,
+                  itemCount: randomizor.nextInt(5) + 1,
                   itemBuilder: (BuildContext context, int index) {
                     if (index < suggestdietplan.length) {
-                      SuggestDietPlans suggestdietplans =
-                          shuffledPlans[index];
+                      SuggestDietPlans suggestdietplans = shuffledPlans[index];
                       return GestureDetector(
                         onTap: () => Navigator.push(
                           context,

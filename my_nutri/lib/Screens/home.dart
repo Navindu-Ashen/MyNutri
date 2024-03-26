@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:my_nutri/Screens/diet_plan.dart';
 import 'package:my_nutri/Screens/list.dart';
 import 'package:my_nutri/Screens/profile_screen.dart';
@@ -16,25 +19,44 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentTab = 0;
   Widget? currentContent;
+  var _isGetUserData = false;
+  var userName = "";
+
   void _navigateToPage(int index) {
     setState(() {
       _currentTab = index;
     });
   }
 
+  void getuserData() async {
+    final user = FirebaseAuth.instance.currentUser!;
+    final userData = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user.uid)
+        .get();
+
+    if (!_isGetUserData) {
+      setState(() {
+        userName = userData.data()!["first-name"];
+      });
+      _isGetUserData = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    getuserData();
     currentContent = SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 50),
+            Padding(
+              padding: const EdgeInsets.only(top: 50),
               child: Text(
-                "Hello User!",
-                style: TextStyle(
+                "Hello $userName!",
+                style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 103, 203, 106),
