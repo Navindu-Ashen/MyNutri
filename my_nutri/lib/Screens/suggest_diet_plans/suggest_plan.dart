@@ -67,7 +67,7 @@ class _SuggestDietPlanState extends State<SuggestDietPlan> {
                   padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: randomizor.nextInt(5),
+                  itemCount: randomizor.nextInt(5)+1,
                   itemBuilder: (BuildContext context, int index) {
                     if (index < suggestdietplan.length) {
                       SuggestDietPlans suggestdietplans =

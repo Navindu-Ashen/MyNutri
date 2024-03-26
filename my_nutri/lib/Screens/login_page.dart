@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void _submit() async {
     final isValid = _form.currentState!.validate();
-    if (isValid) {
+    if (!isValid) {
       return;
     }
 
@@ -199,13 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         if(!_isAuthenticating)
                         ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (ctx) => const HomeScreen(),
-                              ),
-                            );
-                          },
+                          onPressed: _submit,
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                             padding: const EdgeInsets.all(17),
@@ -228,13 +222,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         if(_isAuthenticating)
                         ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (ctx) => const HomeScreen(),
-                              ),
-                            );
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
                             padding: const EdgeInsets.all(17),
