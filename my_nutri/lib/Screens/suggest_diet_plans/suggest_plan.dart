@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:my_nutri/Data/suggest_diet_plans.dart';
 import 'package:my_nutri/Models/suggest_diet_plans.dart';
 import 'package:my_nutri/Screens/suggest_diet_plans/suggest_diet_plans_all.dart';
 import 'package:my_nutri/Screens/suggest_diet_plans/suggest_diet_plans_details.dart';
+
+final randomizor = Random();
 
 class SuggestDietPlan extends StatefulWidget {
   const SuggestDietPlan({super.key});
@@ -12,6 +16,7 @@ class SuggestDietPlan extends StatefulWidget {
 }
 
 class _SuggestDietPlanState extends State<SuggestDietPlan> {
+  final List<SuggestDietPlans> shuffledPlans = getShuffledList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,11 +67,11 @@ class _SuggestDietPlanState extends State<SuggestDietPlan> {
                   padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 3,
+                  itemCount: randomizor.nextInt(5),
                   itemBuilder: (BuildContext context, int index) {
                     if (index < suggestdietplan.length) {
                       SuggestDietPlans suggestdietplans =
-                          suggestdietplan[index];
+                          shuffledPlans[index];
                       return GestureDetector(
                         onTap: () => Navigator.push(
                           context,
@@ -142,7 +147,9 @@ class _SuggestDietPlanState extends State<SuggestDietPlan> {
                         ),
                       );
                     } else {
-                      return Container();
+                      return const Center(
+                        child: Text("No any diet plans sugessted!"),
+                      );
                     }
                   },
                 ),

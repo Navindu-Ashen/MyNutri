@@ -1,9 +1,54 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_nutri/Screens/home.dart';
 import 'package:my_nutri/Screens/sign_up.dart';
 
-class LoginPage extends StatelessWidget {
+final _firebase = FirebaseAuth.instance;
+
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _form = GlobalKey<FormState>();
+  var _enteredEmail = "";
+  var _enteredPassword = "";
+  var _isAuthenticating = false;
+
+  void _submit() async {
+    final isValid = _form.currentState!.validate();
+    if (isValid) {
+      return;
+    }
+
+    FocusScope.of(context).unfocus();
+    _form.currentState!.save();
+
+    setState(() {
+      _isAuthenticating = true;
+    });
+
+    try {
+      await _firebase.signInWithEmailAndPassword(
+          email: _enteredEmail, password: _enteredPassword);
+    } on FirebaseAuthException catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.message ?? "Signup faild"),
+        ),
+      );
+      setState(() {
+        _isAuthenticating = false;
+      });
+      return;
+    }
+    setState(() {
+      _isAuthenticating = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +100,7 @@ class LoginPage extends StatelessWidget {
                       ],
                     ),
                     Form(
+                      key: _form,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -71,6 +117,9 @@ class LoginPage extends StatelessWidget {
                               ),
                             ),
                             child: TextFormField(
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
                               decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Email",
@@ -81,6 +130,17 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                               keyboardType: TextInputType.emailAddress,
+                              onSaved: (value) {
+                                _enteredEmail = value!;
+                              },
+                              validator: (value) {
+                                if (value == null ||
+                                    value.trim().isEmpty ||
+                                    !value.contains("@")) {
+                                  return "Enter a valid email address";
+                                }
+                                return null;
+                              },
                             ),
                           ),
                           const SizedBox(
@@ -96,6 +156,9 @@ class LoginPage extends StatelessWidget {
                               ),
                             ),
                             child: TextFormField(
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
                               obscureText: true,
                               decoration: const InputDecoration(
                                 border: InputBorder.none,
@@ -106,6 +169,17 @@ class LoginPage extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                               ),
+                              onSaved: (value) {
+                                _enteredPassword = value!;
+                              },
+                              validator: (value) {
+                                if (value == null ||
+                                    value.trim().isEmpty ||
+                                    value.trim().length < 6) {
+                                  return "Pleace enter valid password";
+                                }
+                                return null;
+                              },
                             ),
                           ),
                           const SizedBox(
@@ -123,6 +197,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     Column(
                       children: [
+                        if(!_isAuthenticating)
                         ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
@@ -149,6 +224,30 @@ class LoginPage extends StatelessWidget {
                                 fontSize: 20,
                               ),
                             ),
+                          ),
+                        ),
+                        if(_isAuthenticating)
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (ctx) => const HomeScreen(),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            padding: const EdgeInsets.all(17),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            backgroundColor:
+                                const Color.fromARGB(195, 51, 154, 163),
+                          ),
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            )
                           ),
                         ),
                         const SizedBox(

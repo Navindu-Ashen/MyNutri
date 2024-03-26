@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -54,6 +55,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 title: 'Email', value: 'LoveVCgayHuskey<3@gmail.com'),
             const SizedBox(height: 15),
             _buildProfileInfo(title: 'Phone', value: '0774444408'),
+
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  const Color.fromARGB(195, 218, 37, 37),
+                ),
+              ),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              child: const Text(
+                'Logout',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Outfit-Regular",
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -67,24 +88,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
         borderRadius: BorderRadius.circular(8),
         color: const Color.fromARGB(195, 51, 154, 163),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-            ),
-          ),
+          
         ],
       ),
     );
