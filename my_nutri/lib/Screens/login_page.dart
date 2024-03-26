@@ -128,6 +128,9 @@ class _LoginPageState extends State<LoginPage> {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                               keyboardType: TextInputType.emailAddress,
                               onSaved: (value) {
@@ -166,6 +169,9 @@ class _LoginPageState extends State<LoginPage> {
                                 hintStyle: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                                errorStyle: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
