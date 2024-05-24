@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_nutri/Screens/home.dart';
 import 'package:my_nutri/Screens/sign_up.dart';
 
 final _firebase = FirebaseAuth.instance;
@@ -35,6 +34,7 @@ class _LoginPageState extends State<LoginPage> {
       await _firebase.signInWithEmailAndPassword(
           email: _enteredEmail, password: _enteredPassword);
     } on FirebaseAuthException catch (error) {
+      ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(error.message ?? "Signup faild"),
@@ -128,6 +128,9 @@ class _LoginPageState extends State<LoginPage> {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                               keyboardType: TextInputType.emailAddress,
                               onSaved: (value) {
@@ -168,6 +171,9 @@ class _LoginPageState extends State<LoginPage> {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
+                                errorStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                               onSaved: (value) {
                                 _enteredPassword = value!;
@@ -197,47 +203,46 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Column(
                       children: [
-                        if(!_isAuthenticating)
-                        ElevatedButton(
-                          onPressed: _submit,
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            padding: const EdgeInsets.all(17),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                        if (!_isAuthenticating)
+                          ElevatedButton(
+                            onPressed: _submit,
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                              padding: const EdgeInsets.all(17),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              backgroundColor:
+                                  const Color.fromARGB(195, 51, 154, 163),
                             ),
-                            backgroundColor:
-                                const Color.fromARGB(195, 51, 154, 163),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                            child: const Center(
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        if(_isAuthenticating)
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            padding: const EdgeInsets.all(17),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                        if (_isAuthenticating)
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                              padding: const EdgeInsets.all(17),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              backgroundColor:
+                                  const Color.fromARGB(195, 51, 154, 163),
                             ),
-                            backgroundColor:
-                                const Color.fromARGB(195, 51, 154, 163),
-                          ),
-                          child: const Center(
-                            child: CircularProgressIndicator(
+                            child: const Center(
+                                child: CircularProgressIndicator(
                               color: Colors.white,
-                            )
+                            )),
                           ),
-                        ),
                         const SizedBox(
                           height: 5,
                         ),
