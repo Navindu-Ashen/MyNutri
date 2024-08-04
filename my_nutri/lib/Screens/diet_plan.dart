@@ -66,297 +66,527 @@ class _DietPlanPageState extends State<DietPlanPage> {
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     final Size size = MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Get Your Own Diet Plan"),
-      ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Positioned(
-              left: 16,
-              right: 16,
-              bottom: 120,
-              child: Image.asset(
-                "assets/07.png",
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
+      body: LayoutBuilder(builder: (context, constraints) {
+        return Container(
+          width: double.infinity,
+          height: screenSize.height,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/backdrop_3.jpg"),
+              fit: BoxFit.cover,
             ),
-            Container(
-              padding: const EdgeInsets.only(left: 36, right: 36),
-              child: Form(
-                child: Column(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 60,
-                          decoration: const BoxDecoration(
-                            color: Color.fromARGB(195, 18, 114, 167),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                              top: 6,
-                            ),
-                            child: DropdownButtonFormField<String>(
-                              value: selectedBodyType,
-                              dropdownColor:
-                                  const Color.fromARGB(195, 18, 114, 167),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  selectedBodyType = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'Slim',
-                                'Muscular',
-                                'Curvy'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
-                              hint: const Text(
-                                "Body Type",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              onSaved: (value) {
-                                selectedBodyType = value;
-                              },
-                              validator: (value) {
-                                if (selectedBodyType == null) {
-                                  return "Select body type";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 5),
-                          decoration: const BoxDecoration(
-                            color: Color.fromARGB(195, 18, 114, 167),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                          ),
-                          child: TextFormField(
-                            style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Current Body Weight",
-                              hintStyle: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            onSaved: (value) {
-                              selectedBodyWeight = value!;
-                            },
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Enter body weight";
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 5),
-                          decoration: const BoxDecoration(
-                            color: Color.fromARGB(195, 18, 114, 167),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                          ),
-                          child: TextFormField(
-                            style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
-                              hintText: "Weight Goal",
-                              hintStyle: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            onSaved: (value) {
-                              selectedWeightGoad = value!;
-                            },
-                            validator: (value) {
-                              if (selectedFoodHabit == null) {
-                                return "Enter your weight goal";
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 60,
-                          decoration: const BoxDecoration(
-                            color: Color.fromARGB(195, 18, 114, 167),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 16,
-                              right: 16,
-                              top: 6,
-                            ),
-                            child: DropdownButtonFormField<String>(
-                              value: selectedFoodHabit,
-                              dropdownColor:
-                                  const Color.fromARGB(195, 18, 114, 167),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  selectedFoodHabit = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'Balanced Diet',
-                                'Meal Planning',
-                                'Mindful Eating',
-                                'Fiber-rich Foods',
-                                'Healthy Snacking',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: SizedBox(
-                                    width: 200,
-                                    child: Text(
-                                      value,
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
-                              hint: const Text(
-                                "Food Habits",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              onSaved: (value) {
-                                selectedFoodHabit = value;
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Select a food habbit";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: screenSize.height * 0.035,
+                ),
+                Row(
+                  children: <Widget>[
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                      ),
+                      iconSize: 30,
+                      color: const Color.fromARGB(255, 51, 154, 163),
                     ),
-                    const SizedBox(
-                      height: 320,
-                    ),
-                    Column(
-                      children: [
-                        ElevatedButton(
-                          onPressed: _submit,
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            padding: const EdgeInsets.all(17),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            backgroundColor:
-                                const Color.fromARGB(195, 18, 114, 167),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              "Make Diet Plan ",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Need Help?",
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 97, 96, 96)),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const HelpScreen(),
-                              ),
-                            );
-                          },
-                          child: const Text(
-                            "Help Section",
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 63, 170, 72)),
-                          ),
-                        )
-                      ],
-                    )
                   ],
                 ),
-              ),
+                Image.asset(
+                  'assets/logoFinal 1.png',
+                  // width: screenSize.width * 0.35,
+                ),
+                Text(
+                  "Get Your Own \nDiet Plan",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.2,
+                    color: const Color.fromARGB(255, 18, 73, 86),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Stack(
+                  children: [
+                    Positioned(
+                      left: 16,
+                      right: 16,
+                      bottom: 100,
+                      child: Image.asset(
+                        "assets/9762674E.png",
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 36),
+                      child: Form(
+                        child: Column(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  width: screenSize.width * 0.9,
+                                  child: DropdownButtonFormField<String>(
+                                    dropdownColor: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    items: [
+                                      DropdownMenuItem(
+                                        value: 'thin',
+                                        child: Text(
+                                          'Thin',
+                                          style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 51, 154, 163),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 'average',
+                                        child: Text(
+                                          'Average',
+                                          style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 51, 154, 163),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 'fat',
+                                        child: Text(
+                                          'Fat',
+                                          style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 51, 154, 163),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                    onChanged: (value) {},
+                                    decoration: InputDecoration(
+                                      labelText: "Body type",
+                                      labelStyle: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 51, 154, 163),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 17,
+                                      ),
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: const Color.fromARGB(
+                                              255, 51, 154, 163),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: const Color.fromARGB(
+                                              255, 51, 154, 163),
+                                          width: 3,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  width: screenSize.width * 0.9,
+                                  child: TextFormField(
+                                    style: const TextStyle(color: Colors.black),
+                                    textCapitalization: TextCapitalization.none,
+                                    decoration: InputDecoration(
+                                      labelText: "Current Body Weight (Kg)",
+                                      labelStyle: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 51, 154, 163),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 17,
+                                      ),
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: const Color.fromARGB(
+                                              255, 51, 154, 163),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: const Color.fromARGB(
+                                                255, 51, 154, 163),
+                                            width: 3),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    onSaved: (value) {
+                                      selectedBodyWeight = value!;
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "Enter body weight";
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  width: screenSize.width * 0.9,
+                                  child: TextFormField(
+                                    style: const TextStyle(color: Colors.black),
+                                    textCapitalization: TextCapitalization.none,
+                                    decoration: InputDecoration(
+                                      labelText: "Weight Goal",
+                                      labelStyle: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 51, 154, 163),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 17,
+                                      ),
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: const Color.fromARGB(
+                                              255, 51, 154, 163),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: const Color.fromARGB(
+                                                255, 51, 154, 163),
+                                            width: 3),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    onSaved: (value) {
+                                      selectedWeightGoad = value!;
+                                    },
+                                    validator: (value) {
+                                      if (selectedFoodHabit == null) {
+                                        return "Enter your weight goal";
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  width: screenSize.width * 0.9,
+                                  child: TextFormField(
+                                    style: const TextStyle(color: Colors.black),
+                                    textCapitalization: TextCapitalization.none,
+                                    decoration: InputDecoration(
+                                      labelText: "Age",
+                                      labelStyle: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 51, 154, 163),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 17,
+                                      ),
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: const Color.fromARGB(
+                                              255, 51, 154, 163),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: const Color.fromARGB(
+                                                255, 51, 154, 163),
+                                            width: 3),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    onSaved: (value) {
+                                      selectedBodyWeight = value!;
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "Enter Age";
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  width: screenSize.width * 0.9,
+                                  child: TextFormField(
+                                    style: const TextStyle(color: Colors.black),
+                                    textCapitalization: TextCapitalization.none,
+                                    decoration: InputDecoration(
+                                      labelText: "Height (cm)",
+                                      labelStyle: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 51, 154, 163),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 17,
+                                      ),
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: const Color.fromARGB(
+                                              255, 51, 154, 163),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: const Color.fromARGB(
+                                                255, 51, 154, 163),
+                                            width: 3),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    onSaved: (value) {
+                                      selectedBodyWeight = value!;
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "Enter height";
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 45,
+                                  width: screenSize.width * 0.9,
+                                  child: DropdownButtonFormField<String>(
+                                    dropdownColor: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    items: [
+                                      DropdownMenuItem(
+                                        value: '1',
+                                        child: Text(
+                                          'Balanced Diet',
+                                          style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 51, 154, 163),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: '2',
+                                        child: Text(
+                                          'Meal Planning',
+                                          style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 51, 154, 163),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: '3',
+                                        child: Text(
+                                          'Mindful Eating',
+                                          style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 51, 154, 163),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: '4',
+                                        child: Text(
+                                          'Fiber-rich Foods',
+                                          style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 51, 154, 163),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: '5',
+                                        child: Text(
+                                          'Healthy Snacking',
+                                          style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 51, 154, 163),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                    onChanged: (value) {},
+                                    decoration: InputDecoration(
+                                      labelText: "Food Habits",
+                                      labelStyle: TextStyle(
+                                        color: const Color.fromARGB(
+                                            255, 51, 154, 163),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 17,
+                                      ),
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: const Color.fromARGB(
+                                              255, 51, 154, 163),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          color: const Color.fromARGB(
+                                              255, 51, 154, 163),
+                                          width: 3,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 200,
+                            ),
+                            Column(
+                              children: [
+                                ElevatedButton(
+                                  onPressed: _submit,
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    padding: const EdgeInsets.all(17),
+                                    shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                backgroundColor:
+                                   const Color.fromARGB(255, 51, 154, 163),
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      "Make Diet Plan ",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 22,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Need Help?",
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 81, 81, 81),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const HelpScreen(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text(
+                                    "Help Section",
+                                    style: TextStyle(
+                                      color: const Color.fromARGB(255, 51, 154, 163),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }),
     );
   }
 }

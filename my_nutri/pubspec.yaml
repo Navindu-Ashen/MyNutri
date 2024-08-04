@@ -40,6 +40,7 @@ dependencies:
   cloud_firestore: ^4.15.9
   flutter_launcher_icons: ^0.13.1
   convex_bottom_bar: ^3.2.0
+  lottie: ^3.1.2
 
 dev_dependencies:
   flutter_test:
