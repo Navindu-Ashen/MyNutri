@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -262,48 +263,18 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return Scaffold(
       body: currentContent,
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 10.0,
-              offset: Offset(0, -1),
-            ),
-          ],
-        ),
-        child: BottomNavigationBar(
-          currentIndex: _currentTab,
-          selectedItemColor: const Color.fromARGB(195, 14, 192, 106),
-          onTap: _navigateToPage,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                size: 35,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.book,
-                size: 32,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-                size: 35,
-              ),
-              label: '',
-            ),
-          ],
-        ),
+      bottomNavigationBar: ConvexAppBar(
+        backgroundColor: Color.fromARGB(255, 144, 206, 146),
+        height: 55,
+        elevation: 3,
+        shadowColor: Colors.black87,
+        color: Colors.white,
+        onTap: _navigateToPage,
+        items: const [
+          TabItem(icon: Icons.home, title: 'Home'),
+          TabItem(icon: Icons.sports_gymnastics, title: 'Health Tips'),
+          TabItem(icon: Icons.people, title: 'Profile'),
+        ],
       ),
     );
   }
