@@ -23,7 +23,7 @@ class ProfileBar2 extends StatelessWidget {
           height: screenSize.height * 0.17,
           width: screenSize.width * 0.91,
           decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 119, 184, 134),
+            color: Color.fromARGB(255, 51, 154, 163),
             borderRadius: BorderRadius.all(
               Radius.circular(15),
             ),
@@ -41,11 +41,14 @@ class ProfileBar2 extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
-                  height: screenSize.height * 0.25,
-                  width: screenSize.width * 0.3,
+                  height: screenSize.height * 0.17,
+                  width: screenSize.width * 0.28,
                   decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                  ),
                   child: Image.asset(
                     "assets/logoFinal 1.png",
                   ),

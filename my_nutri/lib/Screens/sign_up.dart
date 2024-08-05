@@ -14,13 +14,16 @@ class Signupscreen extends StatefulWidget {
 
 class _SignupscreenState extends State<Signupscreen> {
   final _form = GlobalKey<FormState>();
-  var _enteredFirstName = "";
-  var _enteredLastName = "";
-  var _userName = "";
-  var _enteredEmail = "";
-  var _password = "";
+  String firstName = "";
+  String lastName = "";
+  String age = "";
+  int weight = 0;
+  String bodyType = "";
+  String email = "";
+  String password = "";
   var errorMsg = "";
   var _isAuthenticaing = false;
+  bool isObsecured = true;
 
   void _submit() async {
     final isValid = _form.currentState!.validate();
@@ -36,29 +39,25 @@ class _SignupscreenState extends State<Signupscreen> {
 
     try {
       final userCredentials = await _firebase.createUserWithEmailAndPassword(
-          email: _enteredEmail, password: _password);
+        email: email,
+        password: password,
+      );
 
       await FirebaseFirestore.instance
           .collection("users")
           .doc(userCredentials.user!.uid)
           .set({
-        "first-name": _enteredFirstName,
-        "last-name": _enteredLastName,
-        "user-name": _userName,
-        "email": _enteredEmail,
+        "first-name": firstName,
+        "last-name": lastName,
+        "age": age,
+        "weight": weight,
+        "body-type": bodyType,
+        "email": email,
       });
+    } catch (error) {
+      errorMsg = "Database error. Please try again!";
 
-      _form.currentState!.reset();
-    } on FirebaseAuthException catch (error) {
-      if (error.code == "email-already-in-use") {
-        errorMsg = "Email adderss is already in use";
-      } else if (error.code == "invalid-email") {
-        errorMsg = "Email adderss is not valid";
-      }
-
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).clearSnackBars();
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(errorMsg),
@@ -70,11 +69,30 @@ class _SignupscreenState extends State<Signupscreen> {
       return;
     }
     FirebaseAuth.instance.signOut();
+
     setState(() {
       _isAuthenticaing = false;
     });
 
-    Navigator.of(context).pop();
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return LoginPage();
+        },
+      ),
+      (r) {
+        return false;
+      },
+    );
+
+    // print(firstName);
+    // print(lastName);
+    // print(age);
+    // print(weight);
+    // print(bodyType);
+    // print(email);
+    // print(password);
   }
 
   @override
@@ -93,430 +111,473 @@ class _SignupscreenState extends State<Signupscreen> {
             fit: BoxFit.cover,
           ),
         ),
-        child: SingleChildScrollView(
+        child: SafeArea(
           child: Stack(
             children: [
-              Positioned(
-                bottom: 100,
-                left: 0,
-                right: 0,
-                child: Image.asset("assets/02.png"),
-              ),
+              // Positioned(
+              //   bottom: 100,
+              //   left: 0,
+              //   right: 0,
+              //   child: Image.asset("assets/02.png"),
+              // ),
               Container(
                 width: size.width,
                 height: size.height,
-                padding: const EdgeInsets.only(
-                    left: 20, right: 20, top: 20, bottom: 20),
                 color: Colors.transparent,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    height: 20,
-                    width: double.infinity,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "assets/logo.png",
+                          width: 160,
+                        ),
+                        Form(
+                          key: _form,
+                          child: Column(
                             children: [
+                              TextFormField(
+                                style: const TextStyle(color: Colors.black),
+                                textCapitalization: TextCapitalization.words,
+                                decoration: InputDecoration(
+                                  labelText: "First Name",
+                                  labelStyle: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 51, 154, 163),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17,
+                                  ),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: const Color.fromARGB(
+                                          255, 51, 154, 163),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: const Color.fromARGB(
+                                            255, 51, 154, 163),
+                                        width: 3),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                onSaved: (value) {
+                                  firstName = value!;
+                                },
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return "Enter a valid name";
+                                  }
+                                  return null;
+                                },
+                              ),
                               const SizedBox(
-                                height: 19.8,
+                                height: 8,
                               ),
-                              Image.asset(
-                                "assets/logo.png",
-                                width: 160,
+                              TextFormField(
+                                style: const TextStyle(color: Colors.black),
+                                textCapitalization: TextCapitalization.words,
+                                decoration: InputDecoration(
+                                  labelText: "Last Name",
+                                  labelStyle: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 51, 154, 163),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17,
+                                  ),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: const Color.fromARGB(
+                                          255, 51, 154, 163),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: const Color.fromARGB(
+                                            255, 51, 154, 163),
+                                        width: 3),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                onSaved: (value) {
+                                  lastName = value!;
+                                },
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return "Enter a valid name";
+                                  }
+                                  return null;
+                                },
                               ),
-                            ],
-                          ),
-                          Form(
-                            key: _form,
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  const SizedBox(
-                                    height: 10,
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              TextFormField(
+                                style: const TextStyle(color: Colors.black),
+                                textCapitalization: TextCapitalization.none,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  labelText: "Age",
+                                  labelStyle: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 51, 154, 163),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17,
                                   ),
-                                  SizedBox(
-                                    width: screenSize.width * 0.9,
-                                    child: TextFormField(
-                                      style:
-                                          const TextStyle(color: Colors.black),
-                                      textCapitalization:
-                                          TextCapitalization.none,
-                                      decoration: InputDecoration(
-                                        labelText: "First Name",
-                                        labelStyle: TextStyle(
-                                          color: const Color.fromARGB(
-                                              255, 51, 154, 163),
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 17,
-                                        ),
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: const Color.fromARGB(
-                                                255, 51, 154, 163),
-                                            width: 2,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: const Color.fromARGB(
-                                                  255, 51, 154, 163),
-                                              width: 3),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: const Color.fromARGB(
+                                          255, 51, 154, 163),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: const Color.fromARGB(
+                                            255, 51, 154, 163),
+                                        width: 3),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                onSaved: (value) {
+                                  age = value!;
+                                },
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return "Enter a valid age";
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              TextFormField(
+                                style: const TextStyle(color: Colors.black),
+                                textCapitalization: TextCapitalization.none,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  labelText: "Weight",
+                                  labelStyle: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 51, 154, 163),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17,
+                                  ),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: const Color.fromARGB(
+                                          255, 51, 154, 163),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: const Color.fromARGB(
+                                            255, 51, 154, 163),
+                                        width: 3),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                onSaved: (value) {
+                                  weight = int.parse(value!);
+                                },
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return "Enter a valid body weight";
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              DropdownButtonFormField<String>(
+                                dropdownColor: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                items: [
+                                  DropdownMenuItem(
+                                    value: 'thin',
+                                    child: Text(
+                                      'Thin',
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
                                       ),
-                                      onSaved: (value) {
-                                        _enteredFirstName = value!;
-                                      },
-                                      validator: (value) {
-                                        if (value == null ||
-                                            value.trim().isEmpty) {
-                                          return "Enter a valid name";
-                                        }
-                                        return null;
-                                      },
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  SizedBox(
-                                    width: screenSize.width * 0.9,
-                                    child: TextFormField(
-                                      style:
-                                          const TextStyle(color: Colors.black),
-                                      textCapitalization:
-                                          TextCapitalization.none,
-                                      decoration: InputDecoration(
-                                        labelText: "Last Name",
-                                        labelStyle: TextStyle(
-                                          color: const Color.fromARGB(
-                                              255, 51, 154, 163),
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 17,
-                                        ),
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: const Color.fromARGB(
-                                                255, 51, 154, 163),
-                                            width: 2,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: const Color.fromARGB(
-                                                  255, 51, 154, 163),
-                                              width: 3),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
+                                  DropdownMenuItem(
+                                    value: 'average',
+                                    child: Text(
+                                      'Average',
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
                                       ),
-                                      onSaved: (value) {
-                                        _enteredLastName = value!;
-                                      },
-                                      validator: (value) {
-                                        if (value == null ||
-                                            value.trim().isEmpty) {
-                                          return "Enter a valid name";
-                                        }
-                                        return null;
-                                      },
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  SizedBox(
-                                    width: screenSize.width * 0.9,
-                                    child: TextFormField(
-                                      style:
-                                          const TextStyle(color: Colors.black),
-                                      textCapitalization:
-                                          TextCapitalization.none,
-                                      decoration: InputDecoration(
-                                        labelText: "Age",
-                                        labelStyle: TextStyle(
-                                          color: const Color.fromARGB(
-                                              255, 51, 154, 163),
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 17,
-                                        ),
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: const Color.fromARGB(
-                                                255, 51, 154, 163),
-                                            width: 2,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: const Color.fromARGB(
-                                                  255, 51, 154, 163),
-                                              width: 3),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
+                                  DropdownMenuItem(
+                                    value: 'fat',
+                                    child: Text(
+                                      'Fat',
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 0, 0, 0),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
                                       ),
-                                      onSaved: (value) {
-                                        _userName = value!;
-                                      },
-                                      validator: (value) {
-                                        if (value == null ||
-                                            value.trim().isEmpty ||
-                                            value.trim().length < 6) {
-                                          return "Enter a valid user name";
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  SizedBox(
-                                    width: screenSize.width * 0.9,
-                                    child: TextFormField(
-                                      style:
-                                          const TextStyle(color: Colors.black),
-                                      textCapitalization:
-                                          TextCapitalization.none,
-                                      decoration: InputDecoration(
-                                        labelText: "Weight",
-                                        labelStyle: TextStyle(
-                                          color: const Color.fromARGB(
-                                              255, 51, 154, 163),
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 17,
-                                        ),
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: const Color.fromARGB(
-                                                255, 51, 154, 163),
-                                            width: 2,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: const Color.fromARGB(
-                                                  255, 51, 154, 163),
-                                              width: 3),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                      ),
-                                      onSaved: (value) {
-                                        _enteredEmail = value!;
-                                      },
-                                      validator: (value) {
-                                        if (value == null ||
-                                            value.trim().isEmpty ||
-                                            !value.contains("@")) {
-                                          return "Enter a valid email address";
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  SizedBox(
-                                    width: screenSize.width * 0.9,
-                                    child: DropdownButtonFormField<String>(
-                                      dropdownColor: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                      items: [
-                                        DropdownMenuItem(
-                                          value: 'thin',
-                                          child: Text(
-                                            'Thin',
-                                            style: TextStyle(
-                                              color: const Color.fromARGB(
-                                                  255, 51, 154, 163),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 17,
-                                            ),
-                                          ),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: 'average',
-                                          child: Text(
-                                            'Average',
-                                            style: TextStyle(
-                                              color: const Color.fromARGB(
-                                                  255, 51, 154, 163),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 17,
-                                            ),
-                                          ),
-                                        ),
-                                        DropdownMenuItem(
-                                          value: 'fat',
-                                          child: Text(
-                                            'Fat',
-                                            style: TextStyle(
-                                              color: const Color.fromARGB(
-                                                  255, 51, 154, 163),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 17,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                      onChanged: (value) {},
-                                      decoration: InputDecoration(
-                                        labelText: "Body type",
-                                        labelStyle: TextStyle(
-                                          color: const Color.fromARGB(
-                                              255, 51, 154, 163),
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 17,
-                                        ),
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: const Color.fromARGB(
-                                                255, 51, 154, 163),
-                                            width: 2,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            color: const Color.fromARGB(
-                                                255, 51, 154, 163),
-                                            width: 3,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                      ),
-                                      style:
-                                          const TextStyle(color: Colors.black),
                                     ),
                                   ),
                                 ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 130,
-                          ),
-                          if (!_isAuthenticaing)
-                            ElevatedButton(
-                              onPressed: _submit,
-                              style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                padding: const EdgeInsets.all(17),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                backgroundColor:
-                                    const Color.fromARGB(255, 51, 154, 163),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "Create account",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          if (_isAuthenticaing)
-                            ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                padding: const EdgeInsets.all(17),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                backgroundColor:
-                                    const Color.fromARGB(195, 51, 154, 163),
-                              ),
-                              child: const Center(
-                                  child: CircularProgressIndicator(
-                                color: Colors.white,
-                              )),
-                            ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Already have an account?",
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 81, 81, 81),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const LoginPage(),
-                                    ),
-                                  );
+                                onChanged: (value) {
+                                  bodyType = value!;
                                 },
-                                child: const Text(
-                                  "Log in",
-                                  style: TextStyle(
+                                decoration: InputDecoration(
+                                  labelText: "Body type",
+                                  labelStyle: TextStyle(
                                     color:
                                         const Color.fromARGB(255, 51, 154, 163),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17,
+                                  ),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: const Color.fromARGB(
+                                          255, 51, 154, 163),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: const Color.fromARGB(
+                                          255, 51, 154, 163),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
-                              )
+                                style: const TextStyle(color: Colors.black),
+                                validator: (value) {
+                                  if (value == null) {
+                                    return "Select a body type";
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              TextFormField(
+                                style: const TextStyle(color: Colors.black),
+                                textCapitalization: TextCapitalization.none,
+                                decoration: InputDecoration(
+                                  labelText: "Email",
+                                  labelStyle: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 51, 154, 163),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17,
+                                  ),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: const Color.fromARGB(
+                                          255, 51, 154, 163),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: const Color.fromARGB(
+                                            255, 51, 154, 163),
+                                        width: 3),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                onSaved: (value) {
+                                  email = value!;
+                                },
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.trim().isEmpty ||
+                                      !value.trim().contains("@")) {
+                                    return "Enter a valid email address";
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              TextFormField(
+                                style: const TextStyle(color: Colors.black),
+                                textCapitalization: TextCapitalization.none,
+                                obscureText: isObsecured,
+                                decoration: InputDecoration(
+                                  labelText: "Password",
+                                  labelStyle: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 51, 154, 163),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17,
+                                  ),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  suffixIcon: GestureDetector(
+                                    onTap: () => setState(() {
+                                      isObsecured = !isObsecured;
+                                    }),
+                                    child: Icon(
+                                      isObsecured
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      size: 18,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: const Color.fromARGB(
+                                          255, 51, 154, 163),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: const Color.fromARGB(
+                                            255, 51, 154, 163),
+                                        width: 3),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                onSaved: (value) {
+                                  password = value!;
+                                },
+                                validator: (value) {
+                                  if (value == null ||
+                                      value.trim().isEmpty ||
+                                      value.trim().length < 5) {
+                                    return "Enter a password with 6 characters";
+                                  }
+                                  return null;
+                                },
+                              ),
                             ],
-                          )
-                        ],
-                      ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 56,
+                        ),
+                        if (!_isAuthenticaing)
+                          ElevatedButton(
+                            onPressed: _submit,
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 51, 154, 163),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "Create account",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                        if (_isAuthenticaing)
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 16),
+
+                              backgroundColor:
+                                  const Color.fromARGB(255, 51, 154, 163),
+                            ),
+                            child: const Center(
+                                child: CircularProgressIndicator(
+                              color: Colors.white,
+                            )),
+                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Already have an account?",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 81, 81, 81),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text(
+                                "Log in",
+                                style: TextStyle(
+                                  color:
+                                      const Color.fromARGB(255, 51, 154, 163),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
                     ),
                   ),
                 ),

@@ -8,9 +8,12 @@ import 'package:my_nutri/Screens/get_started.dart';
 import 'package:my_nutri/Screens/list.dart';
 import 'package:my_nutri/Screens/profile_screen.dart';
 import 'package:my_nutri/Screens/pros_and_cons_screen.dart';
-import 'package:my_nutri/Widgets/newBanner.dart';
+import 'package:my_nutri/Widgets/banner1.dart';
+import 'package:my_nutri/Widgets/banner2.dart';
+import 'package:my_nutri/Widgets/banner3.dart';
 import 'package:my_nutri/Widgets/top_recipes_carousel.dart';
 import 'package:my_nutri/Widgets/trending_blogs_carousel.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,13 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentTab = 0;
   Widget? currentContent;
   bool _isGetUserData = false;
-  String userName = "";
+  String firstName = "";
+  String lastName = "";
+  String email = "";
+  int weight = 0;
+  int height = 0;
+  String age = "";
 
-  @override
-  void initState() {
-    super.initState();
-    getuserData();
-  }
+  final PageController _controller = PageController();
 
   void _navigateToPage(int index) {
     setState(() {
@@ -43,13 +47,29 @@ class _HomeScreenState extends State<HomeScreen> {
         .collection("users")
         .doc(user.uid)
         .get();
-
+    print(userData.data());
     if (!_isGetUserData) {
       setState(() {
-        userName = userData.data()!["first-name"];
+        firstName = userData.data()!["first-name"];
+        lastName = userData.data()!["last-name"];
+        email = userData.data()!["email"];
+        age = userData.data()!["age"];
+        weight = userData.data()!["weight"];
         _isGetUserData = true;
       });
+      print(firstName);
+      print(lastName);
+      print(age);
+      print(email);
+      print(weight);
+      print(height);
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getuserData();
   }
 
   @override
@@ -75,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 50),
                 child: Text(
-                  "Hello $userName!",
+                  "Hello $firstName!",
                   style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -97,122 +117,45 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 30,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: SizedBox(
-                  height: 180,
-                  width: double.infinity,
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/Vector 3.png"),
-                            fit: BoxFit.cover,
-                          ),
-                          color: const Color.fromARGB(255, 255, 240, 225),
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              offset: Offset(0, -5),
-                              blurRadius: 5,
-                            ),
-                            BoxShadow(
-                              color: Color.fromARGB(255, 85, 85, 85),
-                              offset: Offset(0, 5),
-                              blurRadius: 5,
-                            ),
-                          ],
+              Column(
+                children: [
+                  SizedBox(
+                    height: 200,
+                    child: PageView(
+                      controller: _controller,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Banner1(),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 18,
-                          top: 10,
-                          bottom: 10,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Banner2(),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const SizedBox(
-                              width: 0,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Trending",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 193, 52, 41),
-                                    letterSpacing: 0.5,
-                                  ),
-                                ),
-                                const Text(
-                                  "The Pros and\nCons of Fast Food.",
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 86, 41, 25),
-                                    letterSpacing: 0.2,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 18,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ReadMoreDetails(),
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    height: 45,
-                                    width: 140,
-                                    decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            255, 195, 95, 79),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: const Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 10, left: 10),
-                                      child: Text(
-                                        "Read More...",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 19.5),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Image.asset(
-                              "assets/06.png",
-                              width: 130,
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Banner3(),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: SmoothPageIndicator(
+                      controller: _controller,
+                      count: 3,
+                      effect: const ExpandingDotsEffect(
+                        dotWidth: 12,
+                        dotHeight: 12,
+                        activeDotColor: Color.fromARGB(255, 18, 73, 86),
+                        dotColor: Color.fromARGB(255, 51, 154, 163),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
-                height: 30,
-              ),
-              Newbanner(),
-              const SizedBox(
-                height: 30,
+                height: 16,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -309,12 +252,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_currentTab == 1) {
       currentContent = const ListScreen();
     } else if (_currentTab == 2) {
-      currentContent = const ProfileScreen(
-        firstname: '',
-        lastname: '',
-        age: '',
-        bmi: '',
-        weight: '',
+      currentContent = ProfileScreen(
+        firstname: firstName,
+        lastname: lastName,
+        age: age,
+        weight: weight,
+        bmi: "20.43",
       );
     }
     return Scaffold(

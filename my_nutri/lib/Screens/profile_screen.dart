@@ -18,7 +18,7 @@ class ProfileScreen extends StatefulWidget {
   final String firstname;
   final String lastname;
   final String age;
-  final String weight;
+  final int weight;
   final String bmi;
 
   @override
@@ -26,28 +26,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final String _userName = 'User123';
-  var firstName = "Loding...";
-  var userEmail = "Loding...";
-  var lastName = "Loding...";
-  var _isGetUserData = false;
-
-  void getuserData() async {
-    final user = FirebaseAuth.instance.currentUser!;
-    final userData = await FirebaseFirestore.instance
-        .collection("users")
-        .doc(user.uid)
-        .get();
-
-    if (!_isGetUserData) {
-      setState(() {
-        firstName = userData.data()!["first-name"];
-        lastName = userData.data()!["last-name"];
-        userEmail = userData.data()!["email"];
-      });
-      _isGetUserData = true;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,10 +51,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 child: Column(
                   children: [
-                    const ProfileBar2(
+                    ProfileBar2(
                       appName: "MyNutri",
                       acctype: "Lite Account",
-                      username: "Tharindu Malinda",
+                      username: "${widget.firstname} ${widget.lastname}",
                     ),
                     SizedBox(height: screenSize.height * 0.02),
                     Column(
@@ -138,7 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 feildName: "Age", username: widget.age),
                             SizedBox(height: screenSize.height * 0.015),
                             ProfileTextHolder2(
-                                feildName: "Weight", username: widget.weight),
+                                feildName: "Weight", username: "${widget.weight}"),
                             SizedBox(height: screenSize.height * 0.015),
                             ProfileTextHolder2(
                                 feildName: "Current BMI value",

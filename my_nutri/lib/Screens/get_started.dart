@@ -31,113 +31,102 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        width: screenSize.width,
-        height: screenSize.height,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          image: DecorationImage(
-            image: AssetImage("assets/backdrop_3.jpg"),
-            fit: BoxFit.cover,
+      body: SafeArea(
+        child: Container(
+          height: screenSize.height,
+          width: screenSize.width,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            image: DecorationImage(
+              image: AssetImage("assets/backdrop_3.jpg"),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView.builder(
-                controller: _controller,
-                itemCount: contents.length,
-                onPageChanged: (int index) {
-                  setState(() {
-                    currentIndex = index;
-                  });
-                },
-                itemBuilder: (_, i) {
-                  return Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 50),
-                        Image.asset(
-                          contents[i].image1,
-                          width: 160,
-                          height: 160,
-                          fit: BoxFit.cover,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Lottie.asset(
-                          'assets/Animation - 1722803479090.json',
-                          width: 500,
-                          height: 350,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Text(
-                            contents[i].title,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 22.5,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Text(
-                            contents[i].description,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500,
-                              color: Color.fromARGB(255, 124, 124, 124),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                contents[0].image1,
+                width: 200,
+                height: 200,
+                fit: BoxFit.cover,
               ),
-            ),
-            Container(
-              height: 60,
-              margin: const EdgeInsets.all(40),
-              width: double.infinity,
-              child: TextButton(
-                onPressed: () {
-                  if (currentIndex == contents.length - 1) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const LoginPage(),
+              const SizedBox(
+                height: 32,
+              ),
+              Lottie.asset(
+                'assets/Animation - 1722803479090.json',
+                width: 500,
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      contents[0].title,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 22.5,
+                        fontWeight: FontWeight.bold,
                       ),
-                    );
-                  }
-                  _controller.nextPage(
-                    duration: const Duration(milliseconds: 100),
-                    curve: Curves.bounceIn,
-                  );
-                },
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
-                  backgroundColor: const Color.fromARGB(255, 51, 154, 163),
-                ),
-                child: Text(
-                  currentIndex == contents.length - 1 ? "Get Started" : "",
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 20),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32),
+                    child: Text(
+                      contents[0].description,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 124, 124, 124),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Container(
+                  width: screenSize.width,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const LoginPage(),
+                        ),
+                      );
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      backgroundColor: const Color.fromARGB(255, 51, 154, 163),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 16),
+                      child: Text(
+                        "Get Started",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

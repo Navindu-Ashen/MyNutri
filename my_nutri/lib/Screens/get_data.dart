@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_nutri/Screens/home.dart';
 
-final user = FirebaseAuth.instance.currentUser!;
+final user = FirebaseAuth.instance;
 
 class GetUserDataScreen extends StatefulWidget {
   const GetUserDataScreen({super.key});
@@ -18,47 +18,55 @@ class _GetUserDataScreenState extends State<GetUserDataScreen> {
   String lastName = "Loding...";
   String email = "Loding...";
   String bodyType = "Loding...";
+  String age = "Loding...";
   int weight = 0;
   int height = 0;
 
   bool _isGetUserData = false;
   bool isGettingUserData = false;
 
-  void getUserData() async {
-    try {
+  Future<void> getUserData() async {
       setState(() {
         isGettingUserData = true;
       });
+      print("Strting..........................................................");
       final userData = await FirebaseFirestore.instance
           .collection("users")
-          .doc(user.uid)
+          .doc(user.currentUser!.uid)
           .get();
+    print("Done1..........................................................");
+      // if (!_isGetUserData) {
+      //   firstName = userData["first-name"];
+      //   lastName = userData["last-name"];
+      //   age = userData["age"];
+      //   weight = userData["weight"];
+      //   height = userData["height"];
+      //   email = userData["email"];
+      //   setState(() {
+      //     _isGetUserData = true;
+      //   });
+      //   loginSuccess();
+      //   return;
+      // }
+      loginSuccess();
 
-      if (!_isGetUserData) {
-        //set data
-      }
-      _isGetUserData = true;
-    } catch (e) {
-      ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "Database error. Please try again!",
-          ),
-        ),
-      );
-      setState(() {
-        isGettingUserData = false;
-      });
-      return;
-    }
     setState(() {
       isGettingUserData = false;
     });
+  }
+
+  void loginSuccess() {
     if (_isGetUserData) {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (ctx) => HomeScreen(),
+          builder: (ctx) => HomeScreen(
+            // firstName: firstName,
+            // lastName: lastName,
+            // age: age,
+            // height: height,
+            // weight: weight,
+            // email: email,
+          ),
         ),
       );
     }
@@ -66,7 +74,7 @@ class _GetUserDataScreenState extends State<GetUserDataScreen> {
 
   @override
   void initState() {
-    //getUserData();
+    getUserData();
     super.initState();
   }
 
@@ -95,7 +103,7 @@ class _GetUserDataScreenState extends State<GetUserDataScreen> {
                   ),
                 ),
               ),
-            if (!isGettingUserData)
+            if (_isGetUserData)
               Icon(
                 Icons.done_outline_rounded,
                 color: Colors.green,
@@ -111,7 +119,7 @@ class _GetUserDataScreenState extends State<GetUserDataScreen> {
                   fontWeight: FontWeight.normal,
                 ),
               ),
-            if (!isGettingUserData)
+            if (_isGetUserData)
               Text(
                 "Done!",
                 textAlign: TextAlign.center,

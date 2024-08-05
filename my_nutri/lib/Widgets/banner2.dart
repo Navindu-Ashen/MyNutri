@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_nutri/Screens/banner2_details.dart';
 
-class Newbanner extends StatefulWidget {
-  const Newbanner({super.key});
+class Banner2 extends StatelessWidget {
+  const Banner2({super.key});
 
-  @override
-  State<Newbanner> createState() => _NewbannerState();
-}
-
-class _NewbannerState extends State<Newbanner> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -79,7 +75,13 @@ class _NewbannerState extends State<Newbanner> {
                             height: 18,
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (ctx) => Banner2Details(),
+                                ),
+                              );
+                            },
                             child: Container(
                               height: 45,
                               width: 140,

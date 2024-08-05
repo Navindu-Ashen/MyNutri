@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_nutri/Screens/get_started.dart';
 import 'package:my_nutri/Screens/sign_up.dart';
+import 'package:my_nutri/main.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -17,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   var _enteredEmail = "";
   var _enteredPassword = "";
   var _isAuthenticating = false;
+  bool isObsecured = true;
 
   void _submit() async {
     final isValid = _form.currentState!.validate();
@@ -49,10 +50,16 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       _isAuthenticating = false;
     });
-    Navigator.of(context).push(
+    Navigator.pushAndRemoveUntil(
+      context,
       MaterialPageRoute(
-        builder: (ctx) => GetStartedScreen(),
+        builder: (BuildContext context) {
+          return MyApp();
+        },
       ),
+      (r) {
+        return false;
+      },
     );
   }
 
@@ -154,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                                     borderSide: const BorderSide(
                                         color: const Color.fromARGB(
                                             255, 51, 154, 163),
-                                            width: 3),
+                                        width: 3),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
@@ -178,6 +185,7 @@ class _LoginPageState extends State<LoginPage> {
                             SizedBox(
                               width: screenSize.width * 0.9,
                               child: TextFormField(
+                                obscureText: isObsecured,
                                 style: const TextStyle(color: Colors.black),
                                 textCapitalization: TextCapitalization.none,
                                 decoration: InputDecoration(
@@ -201,11 +209,23 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
+                                  suffixIcon: GestureDetector(
+                                    onTap: () => setState(() {
+                                      isObsecured = !isObsecured;
+                                    }),
+                                    child: Icon(
+                                      isObsecured
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      size: 18,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
                                         color: const Color.fromARGB(
                                             255, 51, 154, 163),
-                                            width: 3),
+                                        width: 3),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
@@ -227,7 +247,11 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             Text(
                               "Forgot Password?",
-                              style: Theme.of(context).textTheme.bodyLarge,
+                              style: TextStyle(
+                                color: const Color.fromARGB(255, 18, 73, 86),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             )
                           ],
                         ),
@@ -241,13 +265,13 @@ class _LoginPageState extends State<LoginPage> {
                             ElevatedButton(
                               onPressed: _submit,
                               style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                padding: const EdgeInsets.all(17),
+                                elevation: 3,
+                                padding: const EdgeInsets.all(16),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 backgroundColor:
-                                   const Color.fromARGB(255, 51, 154, 163),
+                                    const Color.fromARGB(255, 51, 154, 163),
                               ),
                               child: const Center(
                                 child: Text(
@@ -265,12 +289,12 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: () {},
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
-                                padding: const EdgeInsets.all(17),
+                                padding: const EdgeInsets.all(16),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 backgroundColor:
-                                   const Color.fromARGB(255, 51, 154, 163),
+                                    const Color.fromARGB(255, 51, 154, 163),
                               ),
                               child: const Center(
                                   child: CircularProgressIndicator(
@@ -284,35 +308,30 @@ class _LoginPageState extends State<LoginPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                    "Don't Have An Account?",
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 81, 81, 81),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  ),
+                                "Don't Have An Account?",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 81, 81, 81),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
                               TextButton(
                                 onPressed: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const Signupscreen()),
+                                        builder: (context) =>
+                                            const Signupscreen()),
                                   );
                                 },
-                                style: TextButton.styleFrom(
-                                  elevation: 0,
-                                  padding: const EdgeInsets.all(17),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
                                 child: const Center(
                                   child: Text(
                                     "Create Account",
                                     style: TextStyle(
-                                      color: const Color.fromARGB(255, 51, 154, 163),
+                                      color: const Color.fromARGB(
+                                          255, 51, 154, 163),
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18,
+                                      fontSize: 16,
                                     ),
                                   ),
                                 ),
