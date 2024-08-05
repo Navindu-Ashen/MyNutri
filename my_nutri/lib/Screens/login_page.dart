@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_nutri/Screens/get_started.dart';
 import 'package:my_nutri/Screens/sign_up.dart';
 
 final _firebase = FirebaseAuth.instance;
@@ -48,6 +49,11 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       _isAuthenticating = false;
     });
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => GetStartedScreen(),
+      ),
+    );
   }
 
   @override
